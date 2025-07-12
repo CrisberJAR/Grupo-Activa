@@ -1,0 +1,53 @@
+<!-- views/partials/header.ejs -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/logo.png" height="40" alt="Grupo Activa">
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+      aria-controls="navMenu"
+      aria-expanded="false"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/quienes-somos">Quiénes Somos</a></li>
+        <li class="nav-item"><a class="nav-link" href="/servicios">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link" href="/simulador">Simulador</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if (pageBanner) { %>
+  <!-- Sólo si pasamos pageBanner:true -->
+  <div
+    class="text-center text-white py-5"
+    style="background: linear-gradient(135deg, #0d37f1, #2deede);"
+  >
+    <div class="container">
+      <h1 class="display-4"><%= pageTitle %></h1>
+      <% if (pageSubtitle) { %>
+        <p class="lead"><%= pageSubtitle %></p>
+      <% } %>
+      <% if (action1) { %>
+        <a href="<%= action1.href %>" class="btn btn-light btn-lg me-2">
+          <%= action1.text %>
+        </a>
+      <% } %>
+      <% if (action2) { %>
+        <a href="<%= action2.href %>" class="btn btn-outline-light btn-lg">
+          <%= action2.text %>
+        </a>
+      <% } %>
+    </div>
+  </div>
+<% } %>

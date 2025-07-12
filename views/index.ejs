@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Grupo Activa</title>
+  <title>Inicio | Grupo Activa</title>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="/css/style.css" />
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -15,18 +16,6 @@
       color: #333;
       margin: 0;
     }
-    .navbar {
-      background-color: white;
-    }
-    .navbar-brand {
-      font-weight: bold;
-      color: #1e30f3;
-    }
-    .navbar a {
-      color: #333;
-      font-weight: 500;
-    }
-
     /* GRID LAYOUT */
     .content-grid {
       display: grid;
@@ -65,8 +54,7 @@
       color: white;
       letter-spacing: 1px;
     }
-
-    /* HERO CONTENT (CENTRADO BAJO EL LOGO) */
+    /* HERO CONTENT */
     .hero-content-grid {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
@@ -101,7 +89,6 @@
       padding: 10px 20px;
       font-weight: bold;
     }
-
     /* PROFILE IMAGE CARD */
     .profile-grid {
       grid-column: 2 / 3;
@@ -128,34 +115,17 @@
       max-height: 45rem;
       border-radius: 5vw;
     }
-    
-    footer {
-      background: #fff;
-      color: #444;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg  px-5 py-4">
-    <div class="ms-auto d-flex gap-3">
-      <a class="nav-link" href="/">Inicio</a>
-      <a class="nav-link" href="/quienes-somos">¿Quienes somos?</a>
-      <a class="nav-link" href="/servicios">Servicios</a>
-      <a class="nav-link" href="/simulador">Simulador</a>
-      <a class="nav-link" href="/contacto">Contacto</a>
-      
-    </div>
-  </nav>
+  <!-- NAVBAR -->
+  <%- include('partials/header', {
+        pageBanner:   false
+      }) %>
 
   <!-- GRID: Logo+Badge / Hero / Profile -->
   <section class="content-grid">
-
-    <!-- LOGO + BADGE DEBAJO -->
+    <!-- LOGO + BADGE -->
     <div class="logo-display">
       <img
         src="/assets/logo.png"
@@ -175,8 +145,8 @@
         con Grupo Activa
       </h1>
       <div class="d-flex flex-wrap gap-4">
-        <a href="#" class="btn btn-primary">Simula tu crédito</a>
-        <a href="#" class="btn btn-outline-primary">Ver planes</a>
+        <a href="/simulador" class="btn btn-primary">Simula tu crédito</a>
+        <a href="/servicios" class="btn btn-outline-primary">Ver planes</a>
       </div>
     </div>
 
@@ -186,17 +156,13 @@
         <img
           class="profile-img"
           src="/assets/profile.png"
-          alt="Grupo Activa"
+          alt="Equipo Grupo Activa"
         />
       </div>
     </div>
-
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    &copy; 2025 Grupo Activa – Todos los derechos reservados
-  </footer>
-
+  <%- include('partials/footer') %>
 </body>
 </html>
