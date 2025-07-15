@@ -5,27 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simulador de Crédito | Grupo Activa</title>
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-  >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="/css/style.css">
   <style>
     body { background: #f8f9fa; font-family: 'Roboto', sans-serif; }
-    .sim-card {
-      max-width: 700px;
+    .sim-main-row {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 1200px;
       margin: 2.5rem auto 2rem auto;
+      flex-wrap: wrap;
+    }
+    .sim-card {
+      flex: 1 1 420px;
+      max-width: 700px;
       background: #fff;
       border-radius: 22px;
       box-shadow: 0 4px 18px rgba(13,55,241,0.06);
       padding: 2.3rem 2rem 2rem 2rem;
       position: relative;
       overflow: visible;
+      margin-bottom: 2rem;
     }
     .sim-icon-main {
       position: absolute;
@@ -57,8 +61,7 @@
     .sim-label { font-weight: 500; color: #0d37f1; }
     .sim-summary-cards {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
       gap: 1.1rem;
       margin: 1.5rem 0 1.1rem 0;
     }
@@ -67,7 +70,7 @@
       color: #0d37f1;
       border-radius: 10px;
       padding: 1rem 1.1rem;
-      min-width: 145px;
+      min-width: unset;
       text-align: center;
       font-size: 1.07rem;
       font-weight: 500;
@@ -87,36 +90,112 @@
       -webkit-background-clip: unset;
       -webkit-text-fill-color: unset;
     }
-    .badge-semanal,
-    .badge-diario {
-      background: #e9f7fa;
-      color: #0d37f1;
-      font-size: .97rem;
-      padding: .4em 1.1em;
-      border-radius: 30px;
-      letter-spacing: 1px;
-      font-weight: bold;
-      border: 1px solid #e0eaff;
-      box-shadow: none;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      justify-content: center;
-    }
     .table thead th {
       background: linear-gradient(90deg,#0d37f1 50%, #2deede 100%);
       color: #fff;
       border: none;
     }
     .table tbody td { background: #f5f9ff; }
-    @media (max-width: 800px) {
-      .sim-summary-card { min-width: 120px; font-size: .98rem; }
+
+    /* Sidebar */
+    .sidebar-info {
+      flex: 0 1 340px;
+      max-width: 340px;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgba(13,55,241,0.06);
+      padding: 2.2rem 1.2rem 1.6rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .sidebar-info h3 {
+      font-size: 1.3rem;
+      color: #0d37f1;
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .sidebar-info ul {
+      padding-left: 1.2rem;
+      margin-bottom: 1.1rem;
+      color: #184a90;
+      font-size: 1.02rem;
+    }
+    .sidebar-info li {
+      margin-bottom: .5rem;
+      line-height: 1.35;
+    }
+    .sidebar-image {
+      width: 94%;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      margin: 1.1rem 0 1.1rem 0;
+    }
+    .sidebar-btns {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: .7rem;
+    }
+    .sidebar-btns a {
+      flex: 1 1 50px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.07rem;
+      border-radius: 30px;
+      border: none;
+      padding: .65em 0.8em;
+      display: flex;
+      align-items: center;
+      gap: .5em;
+      transition: background .15s;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #0d37f1;
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #184a90;
+      color: #fff;
+    }
+    @media (max-width: 1000px) {
+      .sim-main-row { flex-direction: column; align-items: stretch; }
+      .sidebar-info { max-width: 100%; }
+      .sim-card { max-width: 100%; }
     }
     @media (max-width: 600px) {
-      .sim-card { padding: 1rem; }
-      .sim-summary-cards { flex-direction: column; gap: .7rem; }
-      .sim-summary-card { width: 100%; min-width: unset; }
+      .sim-card, .sidebar-info { padding: 1rem; }
+    }
+
+    .btn-contacto-grad {
+        background: linear-gradient(90deg, #0d37f1 0%, #2deede 100%);
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        font-weight: 500;
+        font-size: 1.07rem;
+        padding: .45em 1.3em;
+        display: flex;
+        align-items: center;
+        gap: .5em;
+        justify-content: center;
+        box-shadow: 0 1px 6px rgba(13,55,241,0.05);
+        transition: background .18s, filter .15s;
+        min-width: 140px;
+        width: auto;
+    }
+    .btn-contacto-grad:hover {
+        filter: brightness(1.1);
+        color: #fff;
+        background: linear-gradient(90deg, #2deede 0%, #0d37f1 100%);
+        text-decoration: none;
     }
   </style>
 </head>
@@ -125,56 +204,80 @@
   <%- include('partials/header', { pageBanner: false }) %>
 
   <main>
-    <div class="sim-card">
-      <span class="sim-icon-main"><i class="bi bi-calculator"></i></span>
-      <div class="sim-title">Simulador de Crédito</div>
-      <form id="simForm" class="row g-3 mb-3 mt-2">
-        <div class="col-12 col-md-6">
-          <label class="sim-label mb-1"><i class="bi bi-currency-dollar"></i> Monto solicitado</label>
-          <input type="number" class="form-control" id="monto" min="100" max="5000" required placeholder="Ej: 500" />
-        </div>
-        <div class="col-12 col-md-6">
-          <label class="sim-label mb-1"><i class="bi bi-clock-history"></i> Modalidad de pago</label>
-          <select class="form-select" id="modalidad" required>
-            <option value="diario">Pago Diario</option>
-            <option value="semanal">Pago Semanal</option>
-          </select>
-        </div>
-        <div class="col-12 text-center mt-2">
-          <button type="submit" class="btn btn-primary px-4" style="font-size:1.15rem;">
-            <i class="bi bi-lightning-charge-fill"></i> Simular
-          </button>
-        </div>
-      </form>
+    <div class="sim-main-row">
+      <!-- Simulador -->
+      <div class="sim-card">
+        <span class="sim-icon-main"><i class="bi bi-calculator"></i></span>
+        <div class="sim-title">Simulador de Crédito</div>
+        <form id="simForm" class="row g-3 mb-3 mt-2">
+          <div class="col-12 col-md-6">
+            <label class="sim-label mb-1"><i class="bi bi-currency-dollar"></i> Monto solicitado</label>
+            <input type="number" class="form-control" id="monto" min="100" max="5000" required placeholder="Ej: 500" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="sim-label mb-1"><i class="bi bi-clock-history"></i> Modalidad de pago</label>
+            <select class="form-select" id="modalidad" required>
+              <option value="diario">Pago Diario</option>
+              <option value="semanal">Pago Semanal</option>
+            </select>
+          </div>
+          <div class="col-12 text-center mt-2">
+            <button type="submit" class="btn btn-primary px-4" style="font-size:1.15rem;">
+              <i class="bi bi-lightning-charge-fill"></i> Simular
+            </button>
+          </div>
+        </form>
 
-      <div id="simResultados" style="display:none;">
-        <div class="sim-summary-cards">
-          <div class="sim-summary-card">
-            <i class="bi bi-wallet2"></i>
-            Monto: <strong id="resMonto"></strong>
+        <div id="simResultados" style="display:none;">
+          <div class="sim-summary-cards">
+            <div class="sim-summary-card">
+              <i class="bi bi-wallet2"></i>
+              Monto: <strong id="resMonto"></strong>
+            </div>
+            <div class="sim-summary-card">
+              <i class="bi bi-list-ol"></i>
+              Cuotas: <strong id="resCuotas"></strong>
+            </div>
+            <div class="sim-summary-card">
+              <i class="bi bi-cash-coin"></i>
+              Cuota: <strong id="resCuota"></strong>
+            </div>
           </div>
-          <div class="sim-summary-card">
-            <i class="bi bi-list-ol"></i>
-            Cuotas: <strong id="resCuotas"></strong>
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Fecha de Pago</th>
+                  <th>Monto a Pagar</th>
+                </tr>
+              </thead>
+              <tbody id="tablaPagos"></tbody>
+            </table>
           </div>
-          <div class="sim-summary-card">
-            <i class="bi bi-cash-coin"></i>
-            Cuota: <strong id="resCuota"></strong>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-bordered align-middle">
-            <thead>
-              <tr>
-                <th>N°</th>
-                <th>Fecha de Pago</th>
-                <th>Monto a Pagar</th>
-              </tr>
-            </thead>
-            <tbody id="tablaPagos"></tbody>
-          </table>
         </div>
       </div>
+
+      <!-- Sidebar info -->
+      <aside class="sidebar-info">
+        <h3>¿Cómo funciona tu préstamo?</h3>
+        <ul>
+          <li><i class="bi bi-1-circle"></i> Elige el monto y modalidad de pago.</li>
+          <li><i class="bi bi-2-circle"></i> Visualiza cuotas y cronograma.</li>
+          <li><i class="bi bi-3-circle"></i> Solicita tu préstamo y recibe atención personalizada.</li>
+        </ul>
+        <!-- Cambia la ruta de la imagen si deseas -->
+        <img src="/assets/prestamo_asesor.jpg" alt="Cliente con asesor financiero" class="sidebar-image">
+        <div class="sidebar-btns">
+          <div style="text-align:center; font-size:1.07rem; color:#184a90;">
+            <i class="bi bi-telephone" style="color:#0d37f1;font-size:1.2rem;"></i>
+            <strong>Llámanos:</strong> <br> <span style="font-weight:600; color:#0d37f1;">+51 987 654 321</span>
+          </div>
+          <a href="/contacto" class="btn btn-contacto-grad">
+            <i class="bi bi-envelope"></i> Contáctanos
+          </a>
+        </div>
+      </aside>
     </div>
   </main>
 
