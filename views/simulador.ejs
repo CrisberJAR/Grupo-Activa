@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulador de Crédito | Grupo Activa</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body { background: #f8f9fa; font-family: 'Roboto', sans-serif; }
+    .sim-card {
+      max-width: 700px;
+      margin: 2.5rem auto 2rem auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 4px 18px rgba(13,55,241,0.06);
+      padding: 2.3rem 2rem 2rem 2rem;
+      position: relative;
+      overflow: visible;
+    }
+    .sim-icon-main {
+      position: absolute;
+      top: -36px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #0d37f1, #2deede 80%);
+      color: #fff;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.3rem;
+      box-shadow: 0 2px 14px rgba(13,55,241,0.18);
+      border: 6px solid #f8f9fa;
+      z-index: 2;
+    }
+    .sim-title {
+      margin-top: 1.6rem;
+      color: #0d37f1;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+    .sim-label { font-weight: 500; color: #0d37f1; }
+    .sim-summary-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.1rem;
+      margin: 1.5rem 0 1.1rem 0;
+    }
+    .sim-summary-card {
+      background: #f5f9ff;
+      color: #0d37f1;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      min-width: 145px;
+      text-align: center;
+      font-size: 1.07rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      border: 1px solid #e0eaff;
+      transition: box-shadow .2s, transform .2s;
+      box-shadow: 0 1px 4px rgba(13,55,241,0.03);
+    }
+    .sim-summary-card i {
+      font-size: 1.25rem;
+      opacity: .85;
+      color: #090dd8;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+    }
+    .badge-semanal,
+    .badge-diario {
+      background: #e9f7fa;
+      color: #0d37f1;
+      font-size: .97rem;
+      padding: .4em 1.1em;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      font-weight: bold;
+      border: 1px solid #e0eaff;
+      box-shadow: none;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      justify-content: center;
+    }
+    .table thead th {
+      background: linear-gradient(90deg,#0d37f1 50%, #2deede 100%);
+      color: #fff;
+      border: none;
+    }
+    .table tbody td { background: #f5f9ff; }
+    @media (max-width: 800px) {
+      .sim-summary-card { min-width: 120px; font-size: .98rem; }
+    }
+    @media (max-width: 600px) {
+      .sim-card { padding: 1rem; }
+      .sim-summary-cards { flex-direction: column; gap: .7rem; }
+      .sim-summary-card { width: 100%; min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+  <%- include('partials/header', { pageBanner: false }) %>
+
+  <main>
+    <div class="sim-card">
+      <span class="sim-icon-main"><i class="bi bi-calculator"></i></span>
+      <div class="sim-title">Simulador de Crédito</div>
+      <form id="simForm" class="row g-3 mb-3 mt-2">
+        <div class="col-12 col-md-6">
+          <label class="sim-label mb-1"><i class="bi bi-currency-dollar"></i> Monto solicitado</label>
+          <input type="number" class="form-control" id="monto" min="100" max="5000" required placeholder="Ej: 500" />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="sim-label mb-1"><i class="bi bi-clock-history"></i> Modalidad de pago</label>
+          <select class="form-select" id="modalidad" required>
+            <option value="diario">Pago Diario</option>
+            <option value="semanal">Pago Semanal</option>
+          </select>
+        </div>
+        <div class="col-12 text-center mt-2">
+          <button type="submit" class="btn btn-primary px-4" style="font-size:1.15rem;">
+            <i class="bi bi-lightning-charge-fill"></i> Simular
+          </button>
+        </div>
+      </form>
+
+      <div id="simResultados" style="display:none;">
+        <div class="sim-summary-cards">
+          <div class="sim-summary-card">
+            <i class="bi bi-wallet2"></i>
+            Monto: <strong id="resMonto"></strong>
+          </div>
+          <div class="sim-summary-card">
+            <i class="bi bi-list-ol"></i>
+            Cuotas: <strong id="resCuotas"></strong>
+          </div>
+          <div class="sim-summary-card">
+            <i class="bi bi-cash-coin"></i>
+            Cuota: <strong id="resCuota"></strong>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead>
+              <tr>
+                <th>N°</th>
+                <th>Fecha de Pago</th>
+                <th>Monto a Pagar</th>
+              </tr>
+            </thead>
+            <tbody id="tablaPagos"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script>
+    // Configuración: puedes cambiar los porcentajes aquí
+    const PORCENTAJE_DIARIO = 0.20;   // 20% ganancia sobre el monto base
+    const PORCENTAJE_SEMANAL = 0.25;  // 25% ganancia sobre el monto base
+    const CUOTAS_DIARIO = 26;
+    const CUOTAS_SEMANAL = 4;
+
+    // Devuelve la siguiente fecha, saltando domingos si modo diario
+    function siguienteFecha(fecha, modalidad) {
+      let next = new Date(fecha);
+      if (modalidad === 'diario') {
+        do {
+          next.setDate(next.getDate() + 1);
+        } while (next.getDay() === 0); // 0 = domingo
+      } else {
+        next.setDate(next.getDate() + 7);
+      }
+      return next;
+    }
+
+    document.getElementById('simForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const monto = parseFloat(document.getElementById('monto').value);
+      const modalidad = document.getElementById('modalidad').value;
+      let porcentaje = modalidad === 'diario' ? PORCENTAJE_DIARIO : PORCENTAJE_SEMANAL;
+      let cuotas = modalidad === 'diario' ? CUOTAS_DIARIO : CUOTAS_SEMANAL;
+
+      // Validación
+      if(isNaN(monto) || monto < 100){
+        alert('Ingresa un monto válido (mínimo S/ 100)');
+        return;
+      }
+
+      // Cálculo del total a pagar
+      const totalPagar = Math.round((monto * (1 + porcentaje)) * 100) / 100;
+      const montoCuota = Math.round((totalPagar / cuotas) * 100) / 100;
+
+      // Fecha inicial: hoy + 1 día para diario, hoy + 7 días para semanal
+      let fechaHoy = new Date();
+      let fechaPago = new Date(fechaHoy);
+      if (modalidad === 'diario') {
+        fechaPago = siguienteFecha(fechaPago, 'diario');
+      } else {
+        fechaPago.setDate(fechaPago.getDate() + 7);
+      }
+
+      // Resumen visual
+      document.getElementById('resMonto').textContent = "S/ " + monto.toFixed(2);
+      document.getElementById('resCuotas').textContent = cuotas;
+      document.getElementById('resCuota').textContent = "S/ " + montoCuota.toFixed(2);
+
+      // Generar cronograma
+      let tabla = '';
+      let numPago = 1;
+      let pagosRestantes = cuotas;
+      let fecha = new Date(fechaPago);
+
+      while(pagosRestantes > 0){
+        let fechaTexto = fecha.toLocaleDateString('es-PE', { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+        tabla += `<tr>
+          <td>${numPago}</td>
+          <td>${fechaTexto}</td>
+          <td>S/ ${montoCuota.toFixed(2)}</td>
+        </tr>`;
+        // Siguiente fecha
+        fecha = siguienteFecha(fecha, modalidad);
+        pagosRestantes--;
+        numPago++;
+      }
+      document.getElementById('tablaPagos').innerHTML = tabla;
+      document.getElementById('simResultados').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

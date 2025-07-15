@@ -4,91 +4,159 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Servicios | Grupo Activa</title>
+  <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="/css/style.css">
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+  <link rel="stylesheet" href="/css/style.css" />
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      background: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #ffffff;
     }
-
-    header, footer {
-      padding: 20px;
+    .service-hero {
+      background: linear-gradient(135deg, #0d37f1, #2deede);
+      border-radius: 0 0 32px 32px;
+      padding: 2.5rem 0 2rem 0;
+      color: white;
       text-align: center;
-      background-color: #f8f9fa;
+      margin-bottom: 3rem;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #0d37f1;
-      margin-bottom: 10px;
+    .service-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 2.7rem;
+      letter-spacing: -1px;
+      margin-bottom: .8rem;
     }
-    p.subtitle {
-      color: #555;
-      margin-bottom: 20px;
+    .service-hero p {
+      font-size: 1.1rem;
+      color: #e6f7fd;
+      max-width: 600px;
+      margin: 0 auto;
     }
-
-    .service-section {
-      padding: 40px 20px;
+    .service-cards {
+      margin-top: 1.5rem;
     }
-
     .service-card {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 25px;
-      margin-bottom: 20px;
-      background-color: #f5f9ff;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(13,55,241,0.04);
+      padding: 2rem 1.2rem 1.5rem 1.2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      transition: transform .25s;
+      border-top: 4px solid #0d37f1;
     }
-
-    .service-card h4 {
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(45,238,222,0.12);
+      border-top: 4px solid #2deede;
+    }
+    .service-icon {
+      font-size: 2.8rem;
       color: #0d37f1;
-      margin-bottom: 10px;
+      background: linear-gradient(135deg,#0d37f1 60%, #2deede 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .service-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #0d37f1;
+      margin-bottom: .7rem;
+    }
+    .service-desc {
+      color: #333;
+      font-size: 1.03rem;
+      line-height: 1.5;
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- navbar compartido, sin banner -->
+  <!-- Navbar compartido, sin banner -->
   <%- include('partials/header', { pageBanner: false }) %>
 
-  <!-- header específico de Servicios -->
-  <header>
+  <section class="service-hero">
     <h1>Servicios Financieros</h1>
-    <p class="subtitle">Conoce las soluciones que Grupo Activa tiene para ti</p>
-  </header>
+    <p>
+      Descubre todo lo que <strong>Grupo Activa</strong> puede ofrecerte: soluciones a la medida para crecer tu negocio, ahorrar, asesorarte y lograr tus metas financieras con rapidez y confianza.
+    </p>
+  </section>
 
-  <!-- contenido de Servicios -->
-  <main class="container service-section">
-    <div class="service-card">
-      <h4>Créditos para Negocios</h4>
-      <p>Financiamiento flexible para emprendedores y comerciantes independientes.</p>
-    </div>
-    <div class="service-card">
-      <h4>Créditos para Microempresas</h4>
-      <p>Apoyo financiero a microempresas en crecimiento con asesoramiento personalizado.</p>
-    </div>
-    <div class="service-card">
-      <h4>Asesoría Financiera</h4>
-      <p>Te orientamos para que tomes decisiones financieras acertadas según tu situación.</p>
-    </div>
-    <div class="service-card">
-      <h4>Préstamos con Cobro Diario o Semanal</h4>
-      <p>Modalidades de pago adaptadas a tus ingresos diarios o semanales.</p>
-    </div>
-    <div class="service-card">
-      <h4>Planes de Ahorro</h4>
-      <p>Opciones seguras para guardar tu dinero y hacerlo crecer con disciplina.</p>
+  <main class="container service-cards">
+    <div class="row gy-4">
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-briefcase-fill"></i></span>
+          <div class="service-title">Créditos para Negocios</div>
+          <p class="service-desc">
+            Financiamiento flexible para emprendedores, comerciantes y pymes. Solicita online, recibe asesoría y obtén tu crédito en tiempo récord, sin trámites complicados.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-cash-stack"></i></span>
+          <div class="service-title">Microcréditos Rápidos</div>
+          <p class="service-desc">
+            Préstamos de bajo monto ideales para quienes inician su emprendimiento. Respuesta en menos de 24 horas, cuotas accesibles y total transparencia.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-piggy-bank-fill"></i></span>
+          <div class="service-title">Planes de Ahorro</div>
+          <p class="service-desc">
+            Ahorra de manera segura y disciplinada con nuestros planes personalizados. Haz crecer tu dinero y cumple tus objetivos financieros con tasas preferentes.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-bar-chart-line-fill"></i></span>
+          <div class="service-title">Asesoría Financiera</div>
+          <p class="service-desc">
+            Te acompañamos con expertos para tomar las mejores decisiones: análisis de tu negocio, gestión de flujo de caja y consejos para crecer con seguridad.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-calendar2-week-fill"></i></span>
+          <div class="service-title">Préstamos con Pago Diario/Semanal</div>
+          <p class="service-desc">
+            Flexibilidad real: paga tu crédito en cuotas diarias o semanales según tu actividad. Ideal para comerciantes y trabajadores independientes.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="service-card">
+          <span class="service-icon"><i class="bi bi-people-fill"></i></span>
+          <div class="service-title">Atención Personalizada</div>
+          <p class="service-desc">
+            Nuestro equipo está para ti: atención cercana, acompañamiento en todo el proceso y soporte 100% digital, estés donde estés.
+          </p>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- footer compartido -->
+  <!-- Footer compartido -->
   <%- include('partials/footer') %>
-
 </body>
 </html>
