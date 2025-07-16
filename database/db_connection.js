@@ -1,1 +1,0 @@
-// Archivo simulado: db_connection.js

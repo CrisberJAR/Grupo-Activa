@@ -1,1 +1,0 @@
-// Archivo simulado: contactoModel.js
