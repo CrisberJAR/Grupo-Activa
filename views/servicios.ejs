@@ -83,6 +83,29 @@
       line-height: 1.5;
       margin-bottom: 0;
     }
+    .btn-simulador-grad {
+      background: linear-gradient(90deg, #0d8af1 0%, #2e1ae6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      padding: .65em 1.7em;
+      display: inline-flex;
+      align-items: center;
+      gap: .7em;
+      box-shadow: 0 2px 8px rgba(13,55,241,0.08);
+      transition: filter .17s;
+      text-decoration: none;
+    }
+    .btn-simulador-grad:hover {
+      filter: brightness(1.13);
+      color: #fff;
+      text-decoration: none;
+    }
+    .btn-simulador-grad i {
+      font-size: 1.33em;
+    }
   </style>
 </head>
 <body>
@@ -154,6 +177,12 @@
         </div>
       </div>
     </div>
+                        <!-- BOTÓN A SIMULADOR -->
+      <div class="text-center my-4">
+        <a href="/simulador" class="btn btn-simulador-grad">
+          <i class="bi bi-cash-stack"></i> Necesito un Préstamo
+        </a>
+      </div>
   </main>
 
   <!-- Footer compartido -->
